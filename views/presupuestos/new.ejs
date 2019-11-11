@@ -1,0 +1,231 @@
+<% include ../partials/header %>
+
+  <div class="h-100">
+    <div id="navbar" class="bg-info">
+      <a href="/presupuestos/"><i class="fas fa-arrow-left h2 p-0 m-0"></i></a>
+      <p class="navbar-text-custom">Crear presupuesto</p>
+    </div>
+    <div class="navbar-tabs-custom">
+      <ul class="nav nav-tabs bg-white" id="myTabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="cliente-tab" data-toggle="tab" href="#cliente" role="tab">Cliente</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="presupuesto-tab" data-toggle="tab" href="#presupuesto" role="tab">Presupuesto</a>
+        </li>
+      </ul>
+    </div>
+<!-- ==========================
+    SECCION CLIENTE
+========================== -->
+    <div class="active" id="cliente">
+      <div id="clienteOpciones" class="d-flex flex-column justify-content-center align-items-center">
+        <button id="botonCrearCliente" class="btn btn-info my-3 w-25">Crear</button>
+        <button id="botonBuscarCliente" class="btn btn-info my-3 w-25">Buscar existente</button>
+      </div>
+
+      <!-- <form id="form1" action="/presupuestos/new" method="POST">
+        <input name="asd[texto]" type="text">
+        <input name="asd[numero]" type="number">
+      </form>
+
+      <form id="form2" action="/presupuestos/new" method="POST">
+        <input name="asd2[texto]" type="text">
+        <input name="asd2[numero]" type="number">
+        <input type="submit" value="Enviar">
+      </form> -->
+
+      <div id="crearCliente" class="d-none flex-column justify-content-center align-items-center">
+        <form id="clienteCrearForm" class="d-flex flex-column justify-content-center align-items-center w-100" action="/presupuestos/new" method="POST" novalidate>
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Nombre y apellido:</span>
+            </div>
+            <input type="text" class="form-control" id="nombre" name="cliente[nombre]">
+          </div>
+  
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Domicilio:</span>
+            </div>
+            <input type="text" class="form-control" id="domicilio" name="cliente[domicilio]">
+          </div>
+  
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Localidad:</span>
+            </div>
+            <input type="text" class="form-control" id="localidad" name="cliente[localidad]">
+          </div>
+  
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Telefono:</span>
+            </div>
+            <input type="text" class="form-control" id="telefono" name="cliente[telefono]" maxlength="15" pattern="[0-9]" title="Escriba solo numeros">
+          </div>
+  
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Email:</span>
+            </div>
+            <input type="email" class="form-control" id="email" name="cliente[email]">
+          </div>
+  
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">CUIT:</span>
+            </div>
+            <input type="text" class="form-control"  id="cuit" name="cliente[cuit]">
+          </div>
+        </form>
+        <button id="finalizarCliente" class="btn btn-info d-flex justify-content-center align-items-center"><span class="pb-1">Siguiente </span><i class="fas fa-arrow-right h3 p-0 m-0 ml-2"></i></button>
+      </div>
+
+      <div id="buscarCliente" class="d-none flex-column align-items-center">
+        <form id="clienteBuscarForm" class="d-flex flex-column justify-content-center align-items-center w-100 py-3 border-bottom" action="/presupuestos/new" method="GET">
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Cliente:</span>
+            </div>
+            <input type="text" class="form-control" id="clienteNombre" name="clienteNombre">
+          </div>
+          <button form="clienteBuscarForm" id="botonBuscarCliente" class="btn btn-info d-flex justify-content-center align-items-center w-25">Buscar</button>        
+        </form>
+        <div id="resultadosClientes" class="w-100 m-0 p-0 overflow-auto">
+
+        </div>
+      </div>
+    </div>
+<!-- ==========================
+    SECCION PRESUPUESTO
+========================== -->
+    <div class="d-none" id="presupuesto">
+      <div class="w-50 m-0 p-0 border-right">
+        <div class="h-25 border-bottom">
+          <select name="" id="autoSeleccion" class="btn btn-secondary">
+            <option value="" selected disabled>Auto/Motor</option>
+            <option value="nuevo">AGREGAR AUTO</option>
+            <% autos.forEach(function(auto){ %>
+            <option value="<%= auto.listamo %>"><%= auto.descripcion %></option>
+            <% }) %>
+          </select>
+          <input form="presupuestoForm" type="text" name="presupuesto[auto]" id="autoSeleccionado" hidden readonly>
+          <select name="baseDeDatos" id="baseDeDatosSelector" class="btn btn-secondary">
+            <option value="" class="" selected disabled>Base de datos</option>
+            <option value="mdo" class="">Mano de obra</option>
+            <option value="ads" class="">Autopartes del sur</option>
+            <option value="arc" class="">Arcore</option>
+          </select>
+          <!-- <input type="text" name="" id="autoSeleccion" placeholder="auto/motor"> -->
+          <button id="buscarBase" class="btn btn-info">Buscar</button>
+          <button id="editarItems" class="btn btn-info">Editar presupuesto</button>
+          <button id="finalizarPresupuesto" class="btn btn-info">Finalizar</button>
+          <!-- <button form="presupuestoForm" id="finalizarPresupuesto" class="btn btn-info">Finalizar</button> -->
+          <!-- <button id="imprimir" class="btn btn-info">Imprimir</button> -->
+          <h4>Total: </h4><input id="importeTotal" class="presupuesto-item" type="text" form="presupuestoForm" name="presupuesto[importeTotal]" size="9" readonly>
+          <h4>Cliente: </h4><input id="clienteNumero" class="presupuesto-item" type="text" name="clienteNumero" size="3" value="0" readonly><input id="clienteSeleccionado" class="presupuesto-item" type="text" name="clienteSeleccionado" size="35" value="Nuevo" readonly>
+        </div>
+        <div class="h-75 overflow-auto">
+            <div id="formHeader">
+              <span>Codigo</span>
+              <span>Descripcion</span>
+              <span>Imp. U.</span>
+              <span>Cantidad</span>
+            </div>
+            <form id="presupuestoForm" action="/presupuestos/new" method="POST">
+              <!-- <input type="text" name="presupuesto[asd]" id="" value="asdasdasd"> -->
+            </form>
+        </div>
+      </div>
+      <div id="muestraBaseDeDatos" class="w-50 m-0 p-0 overflow-auto">
+        
+      </div>
+      <div id="ajustarPreciosDiv" class="d-none w-50 m-0 p-0">
+        <div class="h-50 w-100 d-flex flex-column justify-content-center align-items-center border-bottom">
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Mano de obra:</span>
+            </div>
+            <input type="text" class="form-control" id="ajustarManoDeObra" name="">
+          </div>
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Repuestos:</span>
+            </div>
+            <input type="text" class="form-control" id="ajustarRepuestos" name="">
+          </div>
+          <button id="ajustarPrecios" class="btn btn-info">Ajustar %</button>
+        </div>
+        <div class="h-50 w-100 d-flex flex-column justify-content-center align-items-center">
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Total mano de obra:</span>
+            </div>
+            <input form="presupuestoForm" type="text" class="form-control" id="totalManoDeObra" name="presupuesto[manoDeObraTotal]">
+          </div>
+          <div class="input-group mb-3 w-50">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Total repuestos:</span>
+            </div>
+            <input form="presupuestoForm" type="text" class="form-control" id="totalRepuestos" name="presupuesto[repuestosTotal]" value="0">
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div id="finalizar" class="d-none h-100 w-100 position-fixed justify-content-center align-items-center">
+      <div id="finalizarOpciones" class="bg-primary text-center">
+        <p class="h5 p-0 mt-5 mb-3 w-100">Desea imprimir el presupuesto con importes?</p>
+        <button id="conImporte" class="btn btn-info w-25 mr-3 mt-4">Si</button>
+        <button id="sinImporte" class="btn btn-info w-25 ml-3 mt-4">No</button>
+      </div>
+    </div>
+
+    <div id="modal" class="d-none h-100 w-100 position-fixed justify-content-center align-items-center">
+      <div id="modal-content" class="bg-primary text-center p-4">
+        <h2 class="mb-4">Agregar auto</h2>
+        <form class="d-flex flex-column justify-content-center align-items-center" action="POST">
+
+          <div class="input-group mb-3 w-100">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Descripcion:</span>
+            </div>
+            <input type="text" class="form-control" id="autoDescripcion" name="auto[descripcion]">
+          </div>
+
+          <div class="input-group mb-3 w-100">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Lista mano de obra:</span>
+            </div>
+            <input type="text" class="form-control" id="autoListamo" name="auto[listamo]">
+          </div>
+
+          <div class="input-group mb-3 w-100">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Lista proveedor:</span>
+            </div>
+            <input type="text" class="form-control" id="autoListare" name="auto[listare]">
+          </div>
+          <button class="btn btn-info">Agregar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<% include ../partials/footer %>

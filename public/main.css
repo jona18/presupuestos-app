@@ -1,0 +1,196 @@
+html, body {
+  height: 100%;
+  /*background-color: rgb(228, 228, 228);*/
+}
+html {
+  box-sizing: border-box;
+}
+*,*:before,*:after {
+  box-sizing: inherit;
+}
+
+#inicio {
+  width: 500px;
+  height: 200px;
+}
+div#navbar {
+  height: 10%;
+}
+
+.navbar-text-custom {
+  font-size: 5vh;
+  text-align: center;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  line-height: 8vh;
+}
+
+.navbar-tabs-custom {
+  height: 7%;
+}
+.navbar-tabs-custom > ul {
+  height: 100%;
+}
+.navbar-tabs-custom > ul > li > a {
+  height: 100%;
+  font-size: 2.5vh;
+  padding: 1.25vh 2.5vh;
+}
+
+div#finalizar {
+  min-height: 400px;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#finalizarOpciones {
+  width: 500px;
+  height: 200px;
+}
+
+div#modal {
+  min-height: 400px;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#modal-content {
+
+}
+
+div#cliente {
+  height: 83%;
+  min-height: 400px;
+
+}
+
+div#cliente > div {
+  height: 100%;
+  min-height: 400px;
+
+}
+
+div#presupuesto {
+  height: 83%;
+}
+
+i.fa-arrow-left {
+  position: fixed;
+  left: 15px;
+  top: 2.6vh;
+  cursor: pointer;
+  color: black;
+  font-size: 5vh;
+}
+
+#formHeader > span {
+  margin: 0;
+  padding: 2px;
+  float: left;
+  border: 1px solid rgb(222, 226, 230);
+  text-align: center;
+  font-weight: bold;
+}
+#formHeader> span:nth-child(1) {
+  width: 11%;
+}
+#formHeader> span:nth-child(2) {
+  width: 64%;
+}
+#formHeader> span:nth-child(3) {
+  width: 12%;
+}
+#formHeader> span:nth-child(4) {
+  width: 13%;
+}
+
+#presupuestoForm > div > input:nth-child(2) {
+  width: 11%;
+}
+#presupuestoForm > div > input:nth-child(3) {
+  width: 64%;
+}
+#presupuestoForm > div > input:nth-child(4) {
+  width: 12%;
+}
+#presupuestoForm > div > input:nth-child(5) {
+  width: 13%;
+}
+
+#muestraBaseDeDatos > table > tbody {
+  cursor: pointer;
+}
+#muestraBaseDeDatos > table > thead > tr > th {
+  text-align: center;
+}
+#muestraBaseDeDatos > table > tbody > tr > td:nth-child(4) {
+  display: none;
+}
+#muestraBaseDeDatos > table > tbody > tr > td:nth-child(5) {
+  display: none;
+}
+/* #muestraBaseDeDatos > table > thead {
+  position: fixed;
+  top: 10vh;
+  left: 50%;
+  width: 100%;
+}
+#muestraBaseDeDatos > table > thead > tr {
+  width: 100%;
+  display: block;
+}
+#muestraBaseDeDatos > table > thead > tr > th:nth-child(1) {
+  width: 60px;
+  display: inline-block;
+}
+#muestraBaseDeDatos > table > thead > tr > th:nth-child(2) {
+  width: 79px;
+  display: inline-block;
+}
+#muestraBaseDeDatos > table > thead > tr > th:nth-child(3) {
+  width: ;
+  display: inline-block;
+} */
+
+.presupuesto-item {
+  background: rgb(202, 202, 202);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.input-editable {
+  background: white !important;
+}
+
+.achicar-descripcion {
+  width: 60% !important;
+}
+
+.borrar-item {
+  width: 4%;
+  height: 25.3333px;
+  border: 1px solid rgb(138, 138, 138);
+  font-size: 25px;
+  text-align: center;
+  color: red;
+  line-height: 23px;
+  cursor: pointer;
+}
+
+td {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+h4 {
+  display: inline;
+}
+
+#resultadosClientes > table > tbody {
+  cursor: pointer;
+}
+#resultadosClientes > table > thead > tr > th {
+  text-align: center;
+}
