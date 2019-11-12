@@ -389,7 +389,9 @@ $(function(){
 
     $('#conImporte').on('click', function(e){
       e.preventDefault();
-      imprimirPresupuesto('conImporte');
+      imprimirPresupuesto('conImporte', function(){
+        window.location.href = "/presupuestos";
+      });
     });
     
     $('#sinImporte').on('click', function(e){
@@ -628,8 +630,6 @@ $(function(){
         
         pdfMake.createPdf(dd).open();
       }
-    }, function(){
-      window.location.href = "/presupuestos";
     });
   }
 
