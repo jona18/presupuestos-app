@@ -628,7 +628,7 @@ $(function(){
         
         pdfMake.createPdf(dd).open();
       }
-    }, function(){
+    }).then(function() {
       window.location.href = "/presupuestos";
     });
   }
