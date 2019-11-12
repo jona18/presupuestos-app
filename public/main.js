@@ -369,7 +369,7 @@ $(function(){
         $("#resultadosClientes").html('<table class="table table-bordered table-hover"><thead><tr><th scope="col">Nro</th><th scope="col">Nombre</th><th scope="col">Domicilio</th><th scope="col">Localidad</th><th scope="col">Telefono</th><th scope="col">Email</th><th scope="col">CUIT</th></tr></thead><tbody></tbody></table>');
 
         data.forEach(function(cliente){
-          $("#resultadosClientes > table > tbody").append("<tr><td>" + cliente.numCliente + "</td><td>" + cliente.nombre + "</td><td>" + cliente.domicilio + "</td><td>" + cliente.localidad + "</td><td>" + cliente.telefono + "</td><td>" + cliente.email + "</td><td>" + cliente.cuit + "</td><td>" + cliente.cuit + "</td>");
+          $("#resultadosClientes > table > tbody").append("<tr><td>" + cliente.numCliente + "</td><td>" + cliente.nombre + "</td><td>" + cliente.domicilio + "</td><td>" + cliente.localidad + "</td><td>" + cliente.telefono + "</td><td>" + cliente.email + "</td><td>" + cliente.cuit + "</td>");
         });
 
         $("#resultadosClientes > table > tbody > tr").on("click", function(e){
