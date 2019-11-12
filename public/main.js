@@ -75,8 +75,10 @@ $(function(){
       $("#ajustarPreciosDiv").removeClass("d-block");
       $(".input-importe").removeClass("input-editable");
       $(".input-cantidad").removeClass("input-editable");
-      $(".input-importe").attr("readonly");
-      $(".input-cantidad").attr("readonly");
+      $(".item-p").removeClass("input-editable");
+      $(".input-importe").attr("readonly", "true");
+      $(".input-cantidad").attr("readonly", "true");
+      $(".item-p").attr("readonly", "true");
       $("div > span:nth-child(2)").removeClass("achicar-descripcion");
       $("#presupuestoForm > div > input:nth-child(3)").removeClass("achicar-descripcion");
       $(".borrar-item").removeClass("d-inline-block");
@@ -92,8 +94,10 @@ $(function(){
       $("#ajustarPreciosDiv").removeClass("d-none");
       $(".input-importe").addClass("input-editable");
       $(".input-cantidad").addClass("input-editable");
+      $(".item-p").addClass("input-editable");
       $(".input-importe").removeAttr("readonly");
       $(".input-cantidad").removeAttr("readonly");
+      $(".item-p").removeAttr("readonly");
       $("div > span:nth-child(2)").addClass("achicar-descripcion");
       $("#presupuestoForm > div > input:nth-child(3)").addClass("achicar-descripcion");
       $(".borrar-item").addClass("d-inline-block");
@@ -198,6 +202,20 @@ $(function(){
 
     if($('#autoSeleccion').val() == 'nuevo') {
       popIn('#modal');
+      $('#crearAuto').on('submit', function(e) {
+        e.preventDefault();
+
+        var autoData = $('#crearAuto').serialize();
+
+        $.ajax({
+          type: "POST",
+          url: "/crearAuto",
+          data: autoData,
+          success: function(data) {
+            location.reload();
+          }
+        });
+      });
     }
   });
 
@@ -369,7 +387,7 @@ $(function(){
         $("#resultadosClientes").html('<table class="table table-bordered table-hover"><thead><tr><th scope="col">Nro</th><th scope="col">Nombre</th><th scope="col">Domicilio</th><th scope="col">Localidad</th><th scope="col">Telefono</th><th scope="col">Email</th><th scope="col">CUIT</th></tr></thead><tbody></tbody></table>');
 
         data.forEach(function(cliente){
-          $("#resultadosClientes > table > tbody").append("<tr><td>" + cliente.numCliente + "</td><td>" + cliente.nombre + "</td><td>" + cliente.domicilio + "</td><td>" + cliente.localidad + "</td><td>" + cliente.telefono + "</td><td>" + cliente.email + "</td><td>" + cliente.cuit + "</td>");
+          $("#resultadosClientes > table > tbody").append("<tr><td>" + cliente.numCliente + "</td><td>" + cliente.nombre + "</td><td>" + cliente.domicilio + "</td><td>" + cliente.localidad + "</td><td>" + cliente.telefono + "</td><td>" + cliente.email + "</td><td>" + cliente.cuit + "</td><td>" + cliente.cuit + "</td>");
         });
 
         $("#resultadosClientes > table > tbody > tr").on("click", function(e){
@@ -396,6 +414,20 @@ $(function(){
       e.preventDefault();
       imprimirPresupuesto('sinImporte');
     });
+  });
+
+  $('#agregarItem').on('click', function(e) {
+    $("#presupuestoForm").append(
+      '<div class="d-flex w-100">' +
+      '<input class="presupuesto-item item-m" type="text" name="presupuesto[items][' + contador + '][lista]" id="" value="99999" hidden readonly>' +
+      '<input class="presupuesto-item item-m" type="text" name="presupuesto[items][' + contador + '][codigo]" id="" value="99999" readonly>' +
+      '<input class="presupuesto-item item-m item-p" type="text" name="presupuesto[items][' + contador + '][descripcion]" id="" value="Descripcion..." readonly>' +
+      '<input class="presupuesto-item item-m input-importe item-p" type="text" name="presupuesto[items][' + contador + '][importe]" id="" value="0" readonly>' +
+      '<input class="presupuesto-item item-m input-cantidad item-p" type="text" name="presupuesto[items][' + contador + '][cantidad]" id="" value="1" readonly>' +
+      '<input class="presupuesto-item item-m" type="text" name="presupuesto[items][' + contador + '][tipo]" id="" value="M" hidden readonly>' +
+      '<i class="fas fa-times borrar-item d-none"></i>' +
+      '</div>');
+    contador++;
   });
 
   
@@ -633,54 +665,7 @@ $(function(){
     });
   }
 
-  // $("#imprimir").on("click", function(e){
-  //   e.preventDefault();
-
-    
-
-  //   var dd = {
-  //     content: [
-  //     // {text: 'Column/row spans', style: 'subheader'},
-  //     // 'Each cell-element can set a rowSpan or colSpan',
-  //     {
-  //       style: 'tabla',
-  //       alignment: 'center',
-  //       table: {
-  //         widths: ['*', '*', '*', '*', '*'],
-  //         headerRows: 1,
-  //         // keepWithHeaderRows: 1,
-  //         body: [
-  //           [
-  //             {text: 'Codigo', style: 'tablaHeader', alignment: 'center'},
-  //             {text: 'Descripcion', style: 'tablaHeader', alignment: 'center'},
-  //             {text: 'Cant.', style: 'tablaHeader', alignment: 'center'},
-  //             {text: 'Imp. Unit.', style: 'tablaHeader', alignment: 'center'},
-  //             {text: 'Total', style: 'tablaHeader', alignment: 'center'}
-  //           ],
-  //           arrayAsd,
-  //           arrayAsd2
-  //         ]
-  //       }
-  //     }
-  //     ],
-  //     styles: {
-  //       tablaHeader: {
-  //         fontSize: 16,
-  //         bold: true
-  //       },
-  //       tabla: {
-  //         fontSize: 15
-  //       }
-  //     }
-  //   }
-
-  //   pdfMake.createPdf(dd).open();
-  // })
-
   function currencyFormatES(num) {
     return (num.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'))
   }
-
-  
-  
 });

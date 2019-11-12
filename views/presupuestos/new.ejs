@@ -121,6 +121,7 @@
           <button id="buscarBase" class="btn btn-info">Buscar</button>
           <button id="editarItems" class="btn btn-info">Editar presupuesto</button>
           <button id="finalizarPresupuesto" class="btn btn-info">Finalizar</button>
+          <button id="agregarItem" class="btn btn-info">Agregar item personalizado</button>
           <!-- <button form="presupuestoForm" id="finalizarPresupuesto" class="btn btn-info">Finalizar</button> -->
           <!-- <button id="imprimir" class="btn btn-info">Imprimir</button> -->
           <h4>Total: </h4><input id="importeTotal" class="presupuesto-item" type="text" form="presupuestoForm" name="presupuesto[importeTotal]" size="9" readonly>
@@ -186,7 +187,7 @@
     <div id="modal" class="d-none h-100 w-100 position-fixed justify-content-center align-items-center">
       <div id="modal-content" class="bg-primary text-center p-4">
         <h2 class="mb-4">Agregar auto</h2>
-        <form class="d-flex flex-column justify-content-center align-items-center" action="POST">
+        <form id="crearAuto" class="d-flex flex-column justify-content-center align-items-center" method="POST" action="/crearAuto">
 
           <div class="input-group mb-3 w-100">
             <div class="input-group-prepend">

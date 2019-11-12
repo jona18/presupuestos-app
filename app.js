@@ -2,15 +2,15 @@ var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
+    moment      = require("moment"),
     Cliente     = require("./models/cliente"),
     Presupuesto = require("./models/presupuesto"),
     ManoDeObra = require("./models/manoDeObraItem"),
     Auto = require("./models/auto"),
     Counter = require("./models/counter");
 
-    
-var url = process.env.DATABASEURL || "mongodb://localhost/presupuestos_app"
-mongoose.connect(url, {useNewUrlParser: true});
+
+mongoose.connect("mongodb://localhost/presupuestos_app", {useNewUrlParser: true});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -176,100 +176,24 @@ app.post("/presupuestos/new", function(req, res){
       }
     });
   }
+});
 
-  
-  // var data = req.body;
-  // var cliente = data.cliente;
-  // var nombre = cliente.nombre;
-  // var domicilio = cliente.domicilio;
-  // var localidad = cliente.localidad;
-  // var telefono = cliente.telefono;
-  // var email = cliente.email;
-  // var cuit = cliente.cuit;
+app.post('/crearAuto', function(req, res) {
+  var auto = req.body.auto;
 
-  // var nuevoCliente;
-
-  // var presupuesto = data.presupuesto;
-  // var manoDeObraTotal = presupuesto.manoDeObraTotal;
-  // var repuestosTotal = presupuesto.repuestosTotal;
-  // var importeTotal = presupuesto.importeTotal;
-  // var items = presupuesto.items;
-  // var auto = presupuesto.auto;
-  // var nuevoPresupuesto;
-  // var counterQuery = Counter.findOneAndUpdate({_id: 'numCliente'}, {$inc:{valor: 1}}, {new: true}, function(err, counterCliente){
-  //   if(err){
-  //     console.log(err);
-  //   } else {
-  //     nuevoCliente = {numCliente: counterCliente.valor, nombre: nombre, domicilio: domicilio, localidad: localidad, telefono: telefono, email: email, cuit: cuit};
-  //     Counter.findOneAndUpdate({_id: 'numPresupuesto'}, {$inc: {valor: 1}}, {new: true}, function(err, counterPresupuesto){
-  //       if(err){
-  //         console.log(err);
-  //       } else {
-  //         nuevoPresupuesto = {numPresupuesto: counterPresupuesto.valor, auto: auto, manoDeObraTotal: manoDeObraTotal, repuestosTotal: repuestosTotal, importeTotal: importeTotal, items: items};
-  //         Cliente.create(nuevoCliente, function(err, clienteCreado){
-  //           if(err){
-  //             console.log(err);
-  //           } else {
-  //             //console.log(clienteCreado);
-  //             Presupuesto.create(nuevoPresupuesto, function(err, presupuestoCreado){
-  //               if(err){
-  //                 console.log(err);
-  //               } else {
-  //                 clienteCreado.presupuestos.push(presupuestoCreado);
-  //                 clienteCreado.save(function(err, dataFinal){
-  //                   if(err){
-  //                     console.log(err);
-  //                   } else {
-  //                     res.json(dataFinal);
-  //                   }
-  //                 })
-  //               }
-  //             });
-  //           }
-  //         });
-  //       }
-  //     })
-  //     // nuevoPresupuesto = {numPresupuesto: data.valor, auto: auto, manoDeObraTotal: manoDeObraTotal, repuestosTotal: repuestosTotal, importeTotal: importeTotal, items: items};
-  //   }
-  // });
-
-
-  // console.log(nuevoPresupuesto);
-
-  // var presupuesto;
-
-  // var nuevoPresupuesto = {
-  //   precioFinal: 9999,
-  //   items: [{
-  //     lista: 2,
-  //     codigo: 5,
-  //     descripcion: "LAVADO DE TAPA 4 CILINDROS",
-  //     importe: 498,
-  //     cantidad: 1
-  //   },
-  //   {
-  //     lista:1,
-  //     codigo:2,
-  //     descripcion: "LAVADO DE MOTOR 4 CILINDROS",
-  //     importe:1229,
-  //     cantidad:1
-  //   },
-  //   {
-  //     lista: 3,
-  //     codigo: 7,
-  //     descripcion: "ENCAMISAR CILINDROS",
-  //     importe: 654,
-  //     cantidad: 4
-  //   }]
-  // };
-  
-  
+  Auto.create(auto, function(err, autoCreado) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.json(autoCreado);
+    }
+  });
 });
 
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(3000, function(){
   console.log("Servidor de aplicacion de presupuestos ejecutandose.");
 });
