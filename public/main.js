@@ -628,6 +628,8 @@ $(function(){
         
         pdfMake.createPdf(dd).open();
       }
+    }, function(){
+      window.location.href = "/presupuestos";
     });
   }
 
