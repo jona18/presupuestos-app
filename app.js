@@ -10,7 +10,8 @@ var express     = require("express"),
     Counter = require("./models/counter");
 
 
-mongoose.connect("mongodb://localhost/presupuestos_app", {useNewUrlParser: true});
+var url = process.env.DATABASEURL || "mongodb://localhost/presupuestos_app"
+mongoose.connect(url, {useNewUrlParser: true});
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -194,6 +195,6 @@ function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
-app.listen(3000, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
   console.log("Servidor de aplicacion de presupuestos ejecutandose.");
 });
